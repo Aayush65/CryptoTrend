@@ -1,11 +1,13 @@
+import { AppPage, Navbar } from "./components"
 
 function App() {
 
-  return (
-    <div className="w-20 h-20 bg-red-600">
-      Hello
-    </div>
-  )
+	return (
+		<div className="max-w-screen min-h-screen bg-background text-text-primary">
+			<Navbar />
+			<AppPage />
+		</div>
+	)
 }
 
 export default App
