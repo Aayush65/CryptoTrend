@@ -8,7 +8,7 @@ import { server } from "../config/urls";
 const Navbar = () => {
     const [ showWatchListButton, setShowWatchListButton ] = useState(false);
     
-    const { email, setEmail, isWatchListVisible, setIsWatchListVisible, setWatchList } = useContext(context);
+    const { email, setEmail, setId, isWatchListVisible, setIsWatchListVisible, setWatchList } = useContext(context);
 
     useEffect(() => {
         if (!localStorage.getItem("email"))
@@ -27,11 +27,13 @@ const Navbar = () => {
         }
     }
 
-    function handleClick() {
+    async function handleClick() {
         if (!email)
             return
-        axios.post(`${server}/new-user`, { email })
+        const response = await axios.post(`${server}/new-user`, { email });
+        setId(response.data.id)
         localStorage.setItem("email", email);
+        localStorage.setItem("id", response.data.id);
         setShowWatchListButton(true);
     }
 
