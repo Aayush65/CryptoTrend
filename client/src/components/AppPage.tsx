@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { TrendingCoins } from "../config/api";
 import Button from "./Button";
 import { LoadingSpinner } from ".";
+import CoinDetails from "./CoinDetails";
+import { CoinAllData } from "./data";
+import { context } from "../context";
 
 type CoinType = {
+    id: string;
     name: string;
     image: string;
     current_price: number;
@@ -19,18 +23,28 @@ const AppPage = () => {
     const [ coinsData, setCoinsData ] = useState<CoinType[]>([]);
     const [ page, setPage ] = useState(1);
     const [ activeTab, setActiveTab ] = useState(-1);
+    const { isWatchListVisible } = useContext(context);
 
     useEffect(() => {
         getCoinData();
     }, [])
 
+    useEffect(() => {
+        if (isWatchListVisible)
+            setActiveTab(-1);
+    }, [isWatchListVisible])
+
     async function getCoinData() {
         if (coinsData.length)
             return;
-        const response = await axios.get(TrendingCoins("usd"))
-        const data = await response.data;
-        console.log(data);
-        setCoinsData(data);
+        try {
+            const response = await axios.get(TrendingCoins("usd"))
+            const data = await response.data;
+            console.log(data);
+            setCoinsData(data);
+        } catch(error) {
+            setCoinsData(CoinAllData as CoinType[]);
+        }
     }
 
     function handlePageChange(newPage: number) {
@@ -40,7 +54,10 @@ const AppPage = () => {
     }
 
     function handleCoinDetails(index: number) {
-        setActiveTab(index)
+        if (index === activeTab)
+            setActiveTab(-1);
+        else
+            setActiveTab(index)
     }
 
     return (
@@ -57,17 +74,20 @@ const AppPage = () => {
                     <p className="w-[18%]">Volume</p>
                 </div>
                 {coinsData.slice((page - 1) * 10, page * 10).map((coin, index) => (
-                    <div key={index} onClick={() => handleCoinDetails(index)} className={`flex items-center bg-secondary p-5 rounded-xl w-full font-semibold hover:cursor-pointer ${activeTab === index ? "hover:scale-105" : ""} transition-transform ease-in`}>
-                        <p className="font-extrabold w-[5%]">{(page - 1) * 10 + index + 1 + '.'}</p>
-                        <div className="flex items-center w-[23%] gap-3">
-                            <img src={coin.image} alt={coin.name + "_img"} className="contain w-16 h-16 rounded-full" />
-                            <p>{coin.name}</p>
+                    <div key={index} className="flex flex-col items-center w-full">
+                        <div onClick={() => handleCoinDetails(index)} className={`flex items-center bg-secondary p-5 rounded-xl w-full font-semibold hover:cursor-pointer ${activeTab === index ? "" : "hover:scale-105"} transition-transform ease-in`}>
+                            <p className="font-extrabold w-[5%]">{(page - 1) * 10 + index + 1 + '.'}</p>
+                            <div className="flex items-center w-[23%] gap-3">
+                                <img src={coin.image} alt={coin.name + "_img"} className="contain w-16 h-16 rounded-full" />
+                                <p>{coin.name}</p>
+                            </div>
+                            <p className="w-[15%]">{'$ ' + coin.current_price}</p>
+                            <p className="w-[18%]">{'$ ' + coin.high_24h}</p>
+                            <p className="w-[18%]">{'$ ' + coin.low_24h}</p>
+                            <p className="w-[18%]">{Math.round(coin.market_cap / 1000000) > 1000 ? Math.round(coin.market_cap / 1000000000) + ' B' : Math.round(coin.market_cap / 1000000) + ' M'}</p>
+                            <p className="w-[18%]">{Math.round(coin.total_volume / 1000000) > 1000 ? Math.round(coin.total_volume / 1000000000) + ' B' : Math.round(coin.total_volume / 1000000) + ' M'}</p>
                         </div>
-                        <p className="w-[15%]">{'$ ' + coin.current_price}</p>
-                        <p className="w-[18%]">{'$ ' + coin.high_24h}</p>
-                        <p className="w-[18%]">{'$ ' + coin.low_24h}</p>
-                        <p className="w-[18%]">{Math.round(coin.market_cap / 1000000) > 1000 ? Math.round(coin.market_cap / 1000000000) + ' B' : Math.round(coin.market_cap / 1000000) + ' M'}</p>
-                        <p className="w-[18%]">{Math.round(coin.total_volume / 1000000) > 1000 ? Math.round(coin.total_volume / 1000000000) + ' B' : Math.round(coin.total_volume / 1000000) + ' M'}</p>
+                        {activeTab === index ? <CoinDetails id={coin.id} name={coin.name} image={coin.image} price={coin.current_price} /> : null}
                     </div>
                 ))}
             </div> : 
