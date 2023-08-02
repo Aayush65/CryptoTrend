@@ -14,16 +14,20 @@ type PropType = {
     name: string;
     image: string;
     price: number;
+    high: number;
+    low: number;
 }
 
 const CoinDetails = (coin: PropType) => {
     const { watchList, setWatchList } = useContext(context);
     const [ trendList, setTrendList ] = useState<number[][]>([]);
+    const [ upLimit, setUpLimit ] = useState<string>(coin.high + '');
+    const [ downLimit, setDownLimit ] = useState<string>(coin.low + '');
     const [ days, setDays ] = useState(1);
     const [ isInWatchList, setIsInWatchList ] = useState(false);
 
     useEffect(() => {
-        if (watchList[coin.id] && !isInWatchList)
+        if (watchList.hasOwnProperty(coin.id) && !isInWatchList)
             setIsInWatchList(true);
         getTrends();
     }, [days])
@@ -41,11 +45,17 @@ const CoinDetails = (coin: PropType) => {
             setWatchList(newWatchList);
         } else {
             const newWatchList = { ...watchList };
-            newWatchList[coin.id] = coin.name;
+            newWatchList[coin.id] = [coin.name, upLimit, downLimit];
             setWatchList(newWatchList);
         }
         setIsInWatchList(!isInWatchList);
     }
+
+    function handleLimits(fn: any, val: string) {
+        if (!val || isNaN(val as any)) return;
+        fn(val);
+    }
+    
 
     return (
         <div className="w-full flex items-center bg-[#7F669D] p-5 rounded-xl font-semibold hover:cursor-pointer h-[50vh]">
@@ -55,6 +65,16 @@ const CoinDetails = (coin: PropType) => {
                     <Button name={"Daily"} handleClick={() => setDays(1)} css=""/>
                     <Button name={"Monthly"} handleClick={() => setDays(30)} css=""/>
                     <Button name={"Yearly"} handleClick={() => setDays(365)} css=""/>
+                </div>
+                <div className="flex flex-col w-full items-center justify-center gap-3">
+                    <label htmlFor="upLimit" className="flex items-center justify-center w-full">
+                        <p className="w-[40%] text-center text-text-primary">High Limit: </p>
+                        <input type="text" id="upLimit" value={upLimit} onChange={(e) => handleLimits(setUpLimit, e.target.value)} className="w-[50%] bg-text-primary rounded-xl p-3" />
+                    </label>
+                    <label htmlFor="dowmLimit" className="flex items-center justify-center w-full">
+                        <p className="w-[40%] text-center text-text-primary">Down Limit: </p>
+                        <input type="text" id="downLimit" value={downLimit} onChange={(e) => handleLimits(setDownLimit, e.target.value)} className="w-[50%] bg-text-primary rounded-xl p-3" />
+                    </label>
                 </div>
             </div>
             <div className="w-[70%] h-[50vh] flex justify-center items-center p-4">
