@@ -31,7 +31,7 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     useEffect(() => {
-        if (email !== "")
+        if (!email)
             return;
         axios.post(`http://localhost:3000/`, { email, watchList })
     }, [watchList])
