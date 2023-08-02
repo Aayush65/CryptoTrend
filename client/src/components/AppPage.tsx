@@ -63,7 +63,7 @@ const AppPage = () => {
     return (
         <div className="max-w-screen md:py-20 md:p-20 lg:px-32 flex flex-col justify-around items-center text-text-secondary overflow-hidden">
             { coinsData.length ? 
-            <div className="flex flex-col items-center gap-5 w-full">
+            <div className="mt-20 flex flex-col items-center gap-5 w-full">
                 <div className="flex items-center bg-primary text-secondary p-5 rounded-xl w-full font-bold text-lg">
                     <p className="w-[5%]"></p>
                     <p className="w-[23%]">Name</p>
@@ -87,7 +87,7 @@ const AppPage = () => {
                             <p className="w-[18%]">{Math.round(coin.market_cap / 1000000) > 1000 ? Math.round(coin.market_cap / 1000000000) + ' B' : Math.round(coin.market_cap / 1000000) + ' M'}</p>
                             <p className="w-[18%]">{Math.round(coin.total_volume / 1000000) > 1000 ? Math.round(coin.total_volume / 1000000000) + ' B' : Math.round(coin.total_volume / 1000000) + ' M'}</p>
                         </div>
-                        {activeTab === index ? <CoinDetails id={coin.id} name={coin.name} image={coin.image} price={coin.current_price} /> : null}
+                        {activeTab === index ? <CoinDetails id={coin.id} name={coin.name} image={coin.image} price={coin.current_price} high={coin.high_24h} low={coin.low_24h} /> : null}
                     </div>
                 ))}
             </div> : 

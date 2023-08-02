@@ -17,7 +17,7 @@ const WatchList = () => {
                 <ul className="w-full min-h-1/2 h-3/4 bg-pink-100 rounded-xl p-4 overflow-y-auto">
                     {Object.keys(watchList).map((id, index) => (
                         <li key={index} className="p-3 border-black border-2 rounded-xl flex justify-between items-center">
-                            <p>{watchList[id]}</p>
+                            <p>{watchList[id][0]}</p>
                             <p className="cursor-pointer text-red-600 font-black text-xl" onClick={() => handleWatchListUpdate(id)}>🗑</p>
                         </li>
                     ))}
