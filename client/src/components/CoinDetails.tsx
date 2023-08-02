@@ -27,7 +27,7 @@ const CoinDetails = (coin: PropType) => {
     const [ isInWatchList, setIsInWatchList ] = useState(false);
 
     useEffect(() => {
-        if (watchList.hasOwnProperty(coin.id) && !isInWatchList)
+        if ((watchList || {}).hasOwnProperty(coin.id) && !isInWatchList)
             setIsInWatchList(true);
         getTrends();
     }, [days])
@@ -42,7 +42,7 @@ const CoinDetails = (coin: PropType) => {
         if (isInWatchList) {
             const newWatchList = { ...watchList };
             delete newWatchList[coin.id];
-            setWatchList(newWatchList);
+            setWatchList(newWatchList || {});
         } else {
             const newWatchList = { ...watchList };
             newWatchList[coin.id] = [coin.name, upLimit, downLimit];
