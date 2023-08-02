@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
 interface ContextData {
@@ -23,10 +24,17 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
     const [ email, setEmail ] = useState("");
     const [ isWatchListVisible, setIsWatchListVisible ] = useState(false);
     const [ watchList, setWatchList ] = useState<{[key: string]: string}>({});
+
     useEffect(() => {
-        if (localStorage.getItem("email") !== null)
+        if (localStorage.getItem("email"))
             setEmail(localStorage.getItem("email") as string);
     }, [])
+
+    useEffect(() => {
+        if (email !== "")
+            return;
+        axios.post(`http://localhost:3000/`, { email, watchList })
+    }, [watchList])
 
     const contextValue = { email, setEmail, isWatchListVisible, setIsWatchListVisible, watchList, setWatchList };
   
