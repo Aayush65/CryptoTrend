@@ -20,12 +20,12 @@ const AppPage = () => {
 
     useEffect(() => {
         getCoinData();
-    }, [page])
+    }, [])
 
     async function getCoinData() {
         if (coinsData.length)
             return;
-        const response = await axios.get(TrendingCoins("usd", page))
+        const response = await axios.get(TrendingCoins("usd"))
         const data = await response.data;
         console.log(data);
         setCoinsData(data);
@@ -51,7 +51,7 @@ const AppPage = () => {
                     <p className="w-[18%]">Market Cap</p>
                     <p className="w-[18%]">Volume</p>
                 </div>
-                {coinsData.map((coin, index) => (
+                {coinsData.slice((page - 1) * 10, page * 10).map((coin, index) => (
                     <div key={index} className="flex items-center bg-secondary p-5 rounded-xl w-full font-semibold hover:cursor-pointer hover:scale-105 transition-transform ease-in">
                         <p className="font-extrabold w-[5%]">{(page - 1) * 10 + index + 1 + '.'}</p>
                         <div className="flex items-center w-[23%] gap-3">
@@ -69,15 +69,15 @@ const AppPage = () => {
             <div className="max-w-screen py-20 px-10 flex flex-col justify-around items-center">Loading...</div> }  
 
             <div className="flex text-text-primary mt-16 gap-3">
-                { page - 1 > 1 ? <Button name={"⏮"} handleClick={() => handlePageChange(1)}/> : null}
+                { page - 1 > 1 ? <Button name={"⏮"} handleClick={() => handlePageChange(1)} css={""}/> : null}
                 { page - 1 > 1 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
-                { page - 1 > 0 ? <Button name={"◀"} handleClick={() => handlePageChange(page - 1)}/> : null}
-                { page - 1 > 0 ? <Button name={page - 1 + ''} handleClick={() => handlePageChange(page - 1)}/> : null}
-                <Button name={page + ''} handleClick={() => handlePageChange(page)}/>
-                { page + 1 < 31 ? <Button name={page + 1 + ''} handleClick={() => handlePageChange(page + 1)}/>: null}
-                { page + 1 < 31 ? <Button name={"▶"} handleClick={() => handlePageChange(page + 1)}/>: null}
+                { page - 1 > 0 ? <Button name={"◀"} handleClick={() => handlePageChange(page - 1)} css={""}/> : null}
+                { page - 1 > 0 ? <Button name={page - 1 + ''} handleClick={() => handlePageChange(page - 1)} css={""}/> : null}
+                <Button name={page + ''} handleClick={() => handlePageChange(page)} css={"bg-secondary text-text-secondary"}/>
+                { page + 1 < 31 ? <Button name={page + 1 + ''} handleClick={() => handlePageChange(page + 1)} css={""}/>: null}
+                { page + 1 < 31 ? <Button name={"▶"} handleClick={() => handlePageChange(page + 1)} css={""}/>: null}
                 { page + 1 < 30 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
-                { page + 1 < 30 ? <Button name={"⏭"} handleClick={() => handlePageChange(30)}/>: null}
+                { page + 1 < 30 ? <Button name={"⏭"} handleClick={() => handlePageChange(30)} css={""}/>: null}
             </div>
         </div>
     )
