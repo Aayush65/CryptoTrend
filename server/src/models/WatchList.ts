@@ -8,9 +8,9 @@ const watchListSchema = new Schema({
         unique: true,
         lowercase: true
     },
-    follows: {
-        type : Array, 
-        "default" : [] 
+    watchList: {
+        type : Object, 
+        "default" : {} 
     }
 });
 
