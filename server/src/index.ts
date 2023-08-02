@@ -1,16 +1,18 @@
 import express from 'express';
-import { Request, Response } from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import mongoose from 'mongoose';
+import { updateUserWatchListController } from './controllers/updateUserWatchListController';
+import { addUserWatchListController } from './controllers/addUserWatchListController';
 
 config();
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.get("/", (req: Request, res: Response) => res.send("Hello World!!"));
+app.post('/new-user', addUserWatchListController);
+app.post('/', updateUserWatchListController);
 
 mongoose.connect(process.env.MONGO_URL!)
     .then(() => {
