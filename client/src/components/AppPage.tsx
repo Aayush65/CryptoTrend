@@ -39,7 +39,7 @@ const AppPage = () => {
     }
 
     return (
-        <div className="max-w-screen md:py-20 md:p-20 lg:px-32 flex flex-col justify-around items-center text-text-secondary">
+        <div className="max-w-screen md:py-20 md:p-20 lg:px-32 flex flex-col justify-around items-center text-text-secondary overflow-hidden">
             { coinsData.length ? 
             <div className="flex flex-col items-center gap-5 w-full">
                 <div className="flex items-center bg-primary text-secondary p-5 rounded-xl w-full font-bold text-lg">
@@ -69,16 +69,15 @@ const AppPage = () => {
             <div className="max-w-screen py-20 px-10 flex flex-col justify-around items-center">Loading...</div> }  
 
             <div className="flex text-text-primary mt-16 gap-3">
-                { page - 1 > 0 ? <Button name={"⏮"} handleClick={() => handlePageChange(1)}/> : null}
+                { page - 1 > 1 ? <Button name={"⏮"} handleClick={() => handlePageChange(1)}/> : null}
                 { page - 1 > 1 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
                 { page - 1 > 0 ? <Button name={"◀"} handleClick={() => handlePageChange(page - 1)}/> : null}
                 { page - 1 > 0 ? <Button name={page - 1 + ''} handleClick={() => handlePageChange(page - 1)}/> : null}
                 <Button name={page + ''} handleClick={() => handlePageChange(page)}/>
                 { page + 1 < 31 ? <Button name={page + 1 + ''} handleClick={() => handlePageChange(page + 1)}/>: null}
                 { page + 1 < 31 ? <Button name={"▶"} handleClick={() => handlePageChange(page + 1)}/>: null}
-                
                 { page + 1 < 30 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
-                { page + 1 < 31 ? <Button name={"⏭"} handleClick={() => handlePageChange(30)}/>: null}
+                { page + 1 < 30 ? <Button name={"⏭"} handleClick={() => handlePageChange(30)}/>: null}
             </div>
         </div>
     )

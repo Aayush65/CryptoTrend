@@ -1,7 +1,7 @@
 
 const Button = (props: { name: string; handleClick: () => void }) => {
   return (
-    <button onClick={props.handleClick} className="py-3 px-5 tracking-wider bg-primary rounded-lg">
+    <button onClick={props.handleClick} className="py-3 px-5 tracking-wider bg-primary rounded-lg hover:scale-105 hover:cursor-pointer">
         {props.name}
     </button>
   )
