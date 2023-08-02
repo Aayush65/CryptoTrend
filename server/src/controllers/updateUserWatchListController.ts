@@ -10,13 +10,11 @@ export async function updateUserWatchListController(req: Request, res: Response)
             badRequest(res);
             return;
         }
-        console.log(watchList);
         const response = await WatchListModel.findOneAndUpdate({email}, {watchList});
         if (!response) {
             notFound(res);
             return;
         }
-        console.log(response);
         statusOkay(res, { message: "WatchList updated successfully" });
     } catch(err) {
         serverError(res, {message: err})

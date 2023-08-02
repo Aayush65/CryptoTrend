@@ -8,4 +8,4 @@ export const HistoricalChart = (id: string, days = 365, currency: string) =>
   `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`;
 
 export const TrendingCoins = (currency: string) =>
-  `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`;
+  `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=200&page=1&sparkline=false&price_change_percentage=24h`;

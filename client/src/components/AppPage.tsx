@@ -99,10 +99,10 @@ const AppPage = () => {
                 { page - 1 > 0 ? <Button name={"‹"} handleClick={() => handlePageChange(page - 1)} css={"text-xl font-bold"}/> : null}
                 { page - 1 > 0 ? <Button name={page - 1 + ''} handleClick={() => handlePageChange(page - 1)} css={""}/> : null}
                 <Button name={page + ''} handleClick={() => handlePageChange(page)} css={"bg-secondary text-text-secondary"}/>
-                { page + 1 < 31 ? <Button name={page + 1 + ''} handleClick={() => handlePageChange(page + 1)} css={""}/>: null}
-                { page + 1 < 31 ? <Button name={"›"} handleClick={() => handlePageChange(page + 1)} css={"text-xl font-bold"}/>: null}
-                { page + 1 < 30 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
-                { page + 1 < 30 ? <Button name={"»"} handleClick={() => handlePageChange(30)} css={"text-xl font-bold"}/>: null}
+                { page + 1 < 21 ? <Button name={page + 1 + ''} handleClick={() => handlePageChange(page + 1)} css={""}/>: null}
+                { page + 1 < 21 ? <Button name={"›"} handleClick={() => handlePageChange(page + 1)} css={"text-xl font-bold"}/>: null}
+                { page + 1 < 20 ? <p className="flex items-center font-extrabold justify-center tracking-widest mx-3 text-3xl">...</p> : null}
+                { page + 1 < 20 ? <Button name={"»"} handleClick={() => handlePageChange(20)} css={"text-xl font-bold"}/>: null}
             </div>
         </div>
     )
