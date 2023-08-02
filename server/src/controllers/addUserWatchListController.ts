@@ -10,9 +10,14 @@ export async function addUserWatchListController(req: Request, res: Response) {
             badRequest(res);
             return;
         }
-        const userObj = new WatchListModel({email});
+        const data = await WatchListModel.findOne({ email }).select("_id");
+        if (data && data._id) {
+            statusOkay(res, { id: data._id });
+            return;
+        }
+        const userObj = new WatchListModel({ email, watchList: {} });
         await userObj.save();
-        statusOkay(res, { message: "WatchList updated successfully" });
+        statusOkay(res, { id: userObj._id });
     } catch(err) {
         serverError(res, {message: err})
     }

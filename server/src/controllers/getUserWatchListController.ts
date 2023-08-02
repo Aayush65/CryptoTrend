@@ -5,7 +5,6 @@ import { badRequest, notFound, serverError, statusOkay } from "../views/view";
 export async function getUserWatchListController(req: Request, res: Response) {
     try {
         const email = req.params.email;
-        console.log(email);
         if (!email) {
             badRequest(res);
             return;
