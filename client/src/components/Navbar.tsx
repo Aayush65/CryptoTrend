@@ -40,10 +40,13 @@ const Navbar = () => {
     }
 
     return (
-        <div className="max-w-screen h-20 p-4 px-10 flex items-center justify-end gap-3">
-            <input type="email" className="p-3 rounded-md text-text-secondary" placeholder="Enter your Email: " value={email} onChange={(e) => setEmail(e.target.value)} />
-            <Button name={"Save"} handleClick={handleClick} css={""} />
-            {showWatchListButton ? <Button name={"WatchList"} handleClick={toggleWatchList} css={""}/> : null}
+        <div className="max-w-screen fixed h-20 p-10 flex items-center justify-between gap-3 w-full bg-gradient-to-b from-black via-background to-transparent backdrop-blur-lg">
+            <h1 className="text-3xl font-black">Crypto-Tracker</h1>
+            <div className="flex gap-3 items-center">
+                <input type="email" className="p-3 rounded-md text-text-secondary" placeholder="Enter your Email: " value={email} onChange={(e) => setEmail(e.target.value)} />
+                <Button name={"Save"} handleClick={handleClick} css={""} />
+                {showWatchListButton ? <Button name={"WatchList"} handleClick={toggleWatchList} css={""}/> : null}
+            </div>
         </div>
     )
 }
