@@ -4,7 +4,7 @@ import { TrendingCoins } from "../config/urls";
 import Button from "./Button";
 import { LoadingSpinner } from ".";
 import CoinDetails from "./CoinDetails";
-import { CoinAllData } from "./data";
+// import { CoinAllData } from "./data";
 import { context } from "../context";
 
 type CoinType = {
@@ -43,7 +43,7 @@ const AppPage = () => {
             console.log(data);
             setCoinsData(data);
         } catch(error) {
-            setCoinsData(CoinAllData as CoinType[]);
+            // setCoinsData(CoinAllData as CoinType[]);
         }
     }
 
