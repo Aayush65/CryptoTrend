@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { TrendingCoins } from "../config/api";
+import { TrendingCoins } from "../config/urls";
 import Button from "./Button";
 import { LoadingSpinner } from ".";
 import CoinDetails from "./CoinDetails";

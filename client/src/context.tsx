@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ReactNode, createContext, useEffect, useState } from 'react';
+import { server } from './config/urls';
 
 interface ContextData {
     email: string;
@@ -33,7 +34,7 @@ const ContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         if (!email || !watchList)
             return;
-        axios.post(`http://localhost:3000/`, { email, watchList })
+        axios.post(server, { email, watchList })
     }, [watchList])
 
     const contextValue = { email, setEmail, isWatchListVisible, setIsWatchListVisible, watchList, setWatchList };

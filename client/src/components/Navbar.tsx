@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import { context } from "../context";
 import axios from "axios";
+import { server } from "../config/urls";
 
 
 const Navbar = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
 
     async function getWatchList() {
         try {
-            const response = await axios.get(`http://localhost:3000/${localStorage.getItem("email")}`);
+            const response = await axios.get(`${server}/${localStorage.getItem("email")}`);
             console.log(response.data.watchList);
             setWatchList(response.data.watchList);
         } catch (err) {
@@ -29,7 +30,7 @@ const Navbar = () => {
     function handleClick() {
         if (!email)
             return
-        axios.post("http://localhost:3000/new-user", { email })
+        axios.post(`${server}/new-user`, { email })
         localStorage.setItem("email", email);
         setShowWatchListButton(true);
     }
