@@ -61,7 +61,7 @@ const AppPage = () => {
     }
 
     return (
-        <div className="max-w-screen md:py-20 md:p-20 lg:px-32 flex flex-col justify-around items-center text-text-secondary overflow-hidden">
+        <div className="hidden md:flex max-w-screen md:py-20 md:p-20 lg:px-32 flex-col justify-around items-center text-text-secondary overflow-hidden">
             { coinsData.length ? 
             <div className="mt-20 flex flex-col items-center gap-5 w-full">
                 <div className="flex items-center bg-primary text-secondary p-5 rounded-xl w-full font-bold text-lg">
@@ -70,8 +70,8 @@ const AppPage = () => {
                     <p className="w-[15%]">Price</p>
                     <p className="w-[18%]">Today's High</p>
                     <p className="w-[18%]">Today's Low</p>
-                    <p className="w-[18%]">Market Cap</p>
-                    <p className="w-[18%]">Volume</p>
+                    <p className="hidden md:block w-[18%]">Market Cap</p>
+                    <p className="hidden md:block w-[18%]">Volume</p>
                 </div>
                 {coinsData.slice((page - 1) * 10, page * 10).map((coin, index) => (
                     <div key={index} className="flex flex-col items-center w-full">
@@ -84,8 +84,8 @@ const AppPage = () => {
                             <p className="w-[15%]">{'$ ' + coin.current_price}</p>
                             <p className="w-[18%]">{'$ ' + coin.high_24h}</p>
                             <p className="w-[18%]">{'$ ' + coin.low_24h}</p>
-                            <p className="w-[18%]">{Math.round(coin.market_cap / 1000000) > 1000 ? Math.round(coin.market_cap / 1000000000) + ' B' : Math.round(coin.market_cap / 1000000) + ' M'}</p>
-                            <p className="w-[18%]">{Math.round(coin.total_volume / 1000000) > 1000 ? Math.round(coin.total_volume / 1000000000) + ' B' : Math.round(coin.total_volume / 1000000) + ' M'}</p>
+                            <p className="hidden md:block w-[18%]">{Math.round(coin.market_cap / 1000000) > 1000 ? Math.round(coin.market_cap / 1000000000) + ' B' : Math.round(coin.market_cap / 1000000) + ' M'}</p>
+                            <p className="hidden md:block w-[18%]">{Math.round(coin.total_volume / 1000000) > 1000 ? Math.round(coin.total_volume / 1000000000) + ' B' : Math.round(coin.total_volume / 1000000) + ' M'}</p>
                         </div>
                         {activeTab === index ? <CoinDetails id={coin.id} name={coin.name} image={coin.image} price={coin.current_price} high={coin.high_24h} low={coin.low_24h} /> : null}
                     </div>
