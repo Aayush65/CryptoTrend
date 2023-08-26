@@ -17,6 +17,9 @@ A cryptocurrency price-tracking website
   - TypeScript
 
 ## Deployment
+```bash
+git clone https://www.github.com/aayush65/cryptowatch
+```
 
 ### Server (BackEnd)
 
