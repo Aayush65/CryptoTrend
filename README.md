@@ -2,7 +2,11 @@
 A cryptocurrency price-tracking website
 
 ## Features
-
+- Real Time Data
+- Data persistency
+- Visual Represnetation of the price trends
+- Watchlist tracking
+- Price Drop alert system
 
 ## Tech Stack
   ### Frontend
