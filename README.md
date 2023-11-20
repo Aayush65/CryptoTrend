@@ -1,4 +1,4 @@
-# CryptoWatch
+# CryptoTrend
 A cryptocurrency price-tracking website
 
 ## Features
@@ -22,7 +22,7 @@ A cryptocurrency price-tracking website
 
 ## Deployment
 ```bash
-git clone https://www.github.com/aayush65/cryptowatch
+git clone https://www.github.com/aayush65/CryptoTrend
 ```
 
 ### Server (BackEnd)
