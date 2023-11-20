@@ -43,7 +43,7 @@ const Navbar = () => {
 
     return (
         <div className="hidden md:flex max-w-screen fixed p-4 md:p-10 flex-col md:flex-row items-center justify-between gap-3 w-full bg-gradient-to-b from-black via-background to-transparent backdrop-blur-lg">
-            <h1 className="text-2xl md:text-3xl font-black">Crypto-Watch</h1>
+            <h1 className="text-2xl md:text-3xl font-black">Crypto-Trend</h1>
             <div className="flex gap-1 md:gap-3 items-center">
                 <input type="email" className="p-2 md:p-3 rounded-md text-text-secondary bg-secondary placeholder:text-text-secondary" placeholder="Enter your Email: " value={email} onChange={(e) => setEmail(e.target.value)} />
                 <Button name={"Save"} handleClick={handleClick} css={""} />
